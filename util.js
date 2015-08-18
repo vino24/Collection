@@ -24,7 +24,6 @@ function isArrayLike(o) {
         return false;
 }
 
-
 //  ÅÐ¶ÏstrÊÇ·ñÎª×Ö·û´®
 function isString(str) {
     // return Object.prototype.toString.call(str) === "[object String]";
