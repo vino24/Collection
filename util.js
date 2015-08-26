@@ -1,5 +1,5 @@
 /**
- * Created by 你的特仑苏 on 2015/5/8.
+ * ********* 数组 ***********
  */
 // 判断arr是否为一个数组，返回一个bool值
 var isArray = Function.isArray || function (arr) {
@@ -24,18 +24,77 @@ function isArrayLike(o) {
         return false;
 }
 
+// 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组
+function uniqArray(arr) {
+    var result = [];
+    for (var i = 0; i < arr.length; i++) {
+        var ietm = arr[i];    // 性能优化
+        if (arr.indexOf(item, i + 1) == -1)
+            result.push(item);
+    }
+    return result;
+}
+
+// 压缩稀疏数组
+function dense(arr) {
+    return arr.filter(function () {
+        return true;
+    });
+}
+//在数组中查找所有出现的x，并返回一个包含匹配索引的数组
+function findall(a, x) {
+    var result = [],
+        len = a.length,
+        pos = 0;                    // 开始搜索的位置
+    while (pos < len) {
+        pos = a.indexOf(x, pos);
+        if (pos === -1) break;      //  未找到，就完成搜索
+        result.push(pos);
+        pos += 1;                   //  从下一个位置开始搜索
+    }
+    return result;
+}
+
+
+/**
+ * ********* 字符串 ***********
+ */
 //  判断str是否为字符串
 function isString(str) {
     // return Object.prototype.toString.call(str) === "[object String]";
     return Object.prototype.toString.call(str).slice(8, -1) === "String";
 }
 
+// 对字符串头尾进行空格字符的去除、包括全角半角空格、Tab等，返回一个字符串
+// 尝试使用一行简洁的正则表达式完成该题目
+function trim(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+}
+
+function each(arr, fn) {
+    for (var i = 0, len = arr.length; i < len; i++) {
+        fn(arr[i], i);
+    }
+}
+
+/**
+ * ********* 函数 ***********
+ */
 // 判断fn是否为一个函数，返回一个bool值，ES5直接Array.isArray(fn)
 function isFunction(fn) {
     // your implement
     return Object.prototype.toString().call(fn) === "[object Function]";
 }
 
+//  检测实参实际个数与期望个数是否相同
+function check(args) {
+    var actual = args.length;     //  实参真实个数
+    var expected = args.callee.length;    //  期望实参个数
+    return actual === expected;
+}
+/**
+ * ********* 对象 ***********
+ */
 // 使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝
 // 被复制的对象类型会被限制为数字、字符串、布尔、日期、数组、Object对象。不会包含函数、正则对象等
 function cloneObject(src) {
@@ -82,49 +141,6 @@ function cloneObject(src) {
     }
 }
 
-// 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组
-function uniqArray(arr) {
-    var result = [];
-    for (var i = 0; i < arr.length; i++) {
-        var ietm = arr[i];    // 性能优化
-        if (arr.indexOf(item, i + 1) == -1)
-            result.push(item);
-    }
-    return result;
-}
-
-// 压缩稀疏数组
-function dense(arr) {
-    return arr.filter(function () {
-        return true;
-    });
-}
-//在数组中查找所有出现的x，并返回一个包含匹配索引的数组
-function findall(a, x) {
-    var result = [],
-        len = a.length,
-        pos = 0;                    // 开始搜索的位置
-    while (pos < len) {
-        pos = a.indexOf(x, pos);
-        if (pos === -1) break;      //  未找到，就完成搜索
-        result.push(pos);
-        pos += 1;                   //  从下一个位置开始搜索
-    }
-    return result;
-}
-
-// 对字符串头尾进行空格字符的去除、包括全角半角空格、Tab等，返回一个字符串
-// 尝试使用一行简洁的正则表达式完成该题目
-function trim(str) {
-    return str.replace(/^\s+|\s+$/g, '');
-}
-
-function each(arr, fn) {
-    for (var i = 0, len = arr.length; i < len; i++) {
-        fn(arr[i], i);
-    }
-}
-
 // 获取一个对象里面第一层元素的数量，返回一个整数
 function getObjectNum(obj) {
     var element = 0;
@@ -135,7 +151,9 @@ function getObjectNum(obj) {
     }
     return element;
 }
-
+/**
+ * ********* 正则表达式 ***********
+ */
 // 判断是否为邮箱地址
 function isEmail(emailStr) {
     return emailStr.search(/^[a-z0-9]([-_\.]?[a-z0-9]+)*@([-_]?[a-z0-9]+)+[\.][a-z]{2,7}([\.][a-z]{2})?$/i) !== -1;
@@ -146,7 +164,10 @@ function isMobilePhone(phone) {
     phone = phone + '';
     return phone.search(/^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/) !== -1;
 }
-
+/**
+ * ********* DOM ***********
+ */
+//  判断元素是否有某个class
 function hasClass(element, ClassName) {
     var name = element.className.split(" ");
     if (name.indexOf(ClassName) !== -1)
@@ -161,11 +182,13 @@ function addClass(element, newClassName) {
 
 // 移除element中的样式oldClassName
 function removeClass(element, oldClassName) {
-    if (!hasClass(element, oldClassName))
+    if (hasClass(element, oldClassName))
         element.className = element.className.replace(oldClassName, "");
 }
-
-//`判断当前脚本运行时是否为严格模式
+/**
+ * ********* 环境 ***********
+ */
+//  判断当前脚本运行时是否为严格模式
 var strict = (function () {
     return !this;
 }());
