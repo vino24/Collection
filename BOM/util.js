@@ -52,3 +52,60 @@ function getDocPos(e) {
     var offsets = getScrollOffsets();
     return {x: viewPos.left + offsets.x, y: viewPos.top + offsets.y};
 }
+
+//  查询URL参数
+function getQueryStringArgs() {
+    var qs = location.search.length > 0 ? location.search.substring(1) : "";
+
+    var args = {};
+    var items = qs.split("&");
+    var name, value;
+
+    items.forEach(function (item) {
+        item = item.split("=");
+        name = decodeURIComponent(item[0]);
+        value = decodeURIComponent(item[1]);
+        args[name] = value;
+    });
+    return args;
+}
+
+//  表单序列化
+function serialize(form) {
+    var parts = [];
+
+    [].slice.call(form.elements).forEach(function (filed) {
+        switch (filed.type) {
+            case "select-one":
+            case "select-multiple":
+                [].slice.call(filed.options).forEach(function (option) {
+                    if (option.selected) {
+                        var value = "";
+                        if (option.hasAttribute) {
+                            value = (option.hasAttribute("value") ? option.value : option.text);
+                        } else {  //  IE
+                            value = (option.attributes["value"].specified ? option.value : option.text);
+                        }
+                        parts.push(encodeURIComponent(filed.name) + "=" + encodeURIComponent(value));
+                    }
+                });
+                break;
+
+            case undefined:
+            case "file":
+            case "submit":
+            case "reset":
+            case "button":
+                break;
+
+            case "radio":
+            case "checkbox":
+                if (!filed.checked) {
+                    break;
+                }
+            default :
+                parts.push(encodeURIComponent(filed.name) + "=" + encodeURIComponent(filed.value));
+        }
+    });
+    return parts.join("&");
+}
