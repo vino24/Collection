@@ -66,9 +66,13 @@ function isString(str) {
 }
 
 // 对字符串头尾进行空格字符的去除、包括全角半角空格、Tab等，返回一个字符串
-// 尝试使用一行简洁的正则表达式完成该题目
 function trim(str) {
-    return str.replace(/^\s+|\s+$/g, '');
+    if (String.prototype.trim) {
+        return str.trim();
+    }
+    else {
+        return str.replace(/^\s+|\s+$/g, '');
+    }
 }
 
 function each(arr, fn) {
@@ -92,19 +96,38 @@ function check(args) {
     var expected = args.callee.length;    //  期望实参个数
     return actual === expected;
 }
+
+//  产生[from,to]区间的n个随机数
+function getRandom(from, to, n) {
+    var arr = [];
+    for (var i = 0; i < n; i++) {
+        arr.push(Math.floor(Math.random() * (to - from + 1) + from));
+    }
+    return arr;
+}
+
+//  产生[from,to)区间的n个随机数
+function getRandomTwo(from, to, n) {
+    var arr = [];
+    for (var i = 0; i < n; i++) {
+        arr.push(Math.random() * (to - from) + from);
+    }
+    return arr;
+}
+
+
 /**
  * ********* 对象 ***********
  */
 // 使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝
 // 被复制的对象类型会被限制为数字、字符串、布尔、日期、数组、Object对象。不会包含函数、正则对象等
-function cloneObject(src) {
+function clone(src) {
     //对于 数字 字符串 布尔 null undefined
     if (src == null || typeof src != "object")
         return src;
     //对于 Date
     else if (src instanceof Date) {
-        var clone;
-        clone = new Date(src);
+        var clone = new Date(src);
         return clone;
     }
     // 对于 数组
@@ -122,8 +145,9 @@ function cloneObject(src) {
          for (var key in src) {
 
          if (src.hasOwnProperty(key))    // 忽略继承属性
-         clone[key] = cloneObject(src[key]); //递归
-         //  clone[key]=src[key]; 结果一致 可能是由于是引用类型所致
+         clone[key] = clone(src[key]); //递归
+         //  clone[key]=src[key]; //    结果一致 可能是由于是引用类型所致
+         }
          */
 
         /*
