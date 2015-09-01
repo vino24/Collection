@@ -25,3 +25,27 @@ function escapeHtml(str) {
         }
     });
 }
+
+//  类似querySelect()的函数,仅支持ID、class、tag选择器
+
+function query(selector) {
+    var reg = selector.match(/^(#)?(\.)?(\w+)$/);
+    var result = [];
+    if (reg[3]) {
+        //  id选择器
+        if (reg[1] && !reg[2]) {
+            result.push(document.getElementById(reg[3]));
+        } else if (reg[2] && !reg[1]) {
+            var classes = document.getElementsByClassName(reg[3]);
+            [].slice.call(classes).forEach(function (i) {
+                result.push(i);
+            });
+        } else if (!reg[1] && !reg[2]) {
+            var tags = document.getElementsByTagName(reg[3]);
+            [].slice.call(tags).forEach(function (j) {
+                result.push(j);
+            });
+        }
+    }
+    return result;
+}
