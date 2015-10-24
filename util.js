@@ -1,71 +1,71 @@
 /**
- * ********* Êý×é ***********
+ * ********* æ•°ç»„ ***********
  */
-// ÅÐ¶ÏarrÊÇ·ñÎªÒ»¸öÊý×é£¬·µ»ØÒ»¸öboolÖµ
+// åˆ¤æ–­arræ˜¯å¦ä¸ºä¸€ä¸ªæ•°ç»„ï¼Œè¿”å›žä¸€ä¸ªboolå€¼
 var isArray = Function.isArray || function (arr) {
         return typeof arr
             === "object" && Object.prototype.toString.call(arr) === "[object Array]";
     };
 
 /**
- *  ÅÐ¶Ï¶ÔÏóÊÇ·ñÎªÀàÊý×é¶ÔÏó
- *  ×Ö·û´®ºÍº¯ÊýÓÐlengthÊôÐÔ£¬¿ÉÒÔÓÃtypeof¼ì²âÅÅ³ý£¬¿Í»§¶ËJavaScriptÖÐ£¬DOMÎÄ±¾½ÚµãÓÐlengthÊôÐÔ£¬
- *  ¿ÉÒÔÓÃo.nodetype!=3¼ì²âÅÅ³ý
+ *  åˆ¤æ–­å¯¹è±¡æ˜¯å¦ä¸ºç±»æ•°ç»„å¯¹è±¡
+ *  å­—ç¬¦ä¸²å’Œå‡½æ•°æœ‰lengthå±žæ€§ï¼Œå¯ä»¥ç”¨typeofæ£€æµ‹æŽ’é™¤ï¼Œå®¢æˆ·ç«¯JavaScriptä¸­ï¼ŒDOMæ–‡æœ¬èŠ‚ç‚¹æœ‰lengthå±žæ€§ï¼Œ
+ *  å¯ä»¥ç”¨o.nodetype!=3æ£€æµ‹æŽ’é™¤
  */
 function isArrayLike(o) {
-    if (o &&                                    // oÊÇ·Çnull¡¢undefinedµÈ
-        typeof o === "object" &&                // oÊÇ¶ÔÏó
-        isFinite(o.length) &&                   // o.lengthÊÇÓÐÏÞÊýÖµ
+    if (o &&                                    // oæ˜¯éžnullã€undefinedç­‰
+        typeof o === "object" &&                // oæ˜¯å¯¹è±¡
+        isFinite(o.length) &&                   // o.lengthæ˜¯æœ‰é™æ•°å€¼
         o.length >= 0 &&
-        o.length === Math.floor(o.length) &&    // o.lengthÊÇÕûÊý
+        o.length === Math.floor(o.length) &&    // o.lengthæ˜¯æ•´æ•°
         o.length < 4294967296)
         return true;
     else
         return false;
 }
 
-// ¶ÔÊý×é½øÐÐÈ¥ÖØ²Ù×÷£¬Ö»¿¼ÂÇÊý×éÖÐÔªËØÎªÊý×Ö»ò×Ö·û´®£¬·µ»ØÒ»¸öÈ¥ÖØºóµÄÊý×é
+// å¯¹æ•°ç»„è¿›è¡ŒåŽ»é‡æ“ä½œï¼Œåªè€ƒè™‘æ•°ç»„ä¸­å…ƒç´ ä¸ºæ•°å­—æˆ–å­—ç¬¦ä¸²ï¼Œè¿”å›žä¸€ä¸ªåŽ»é‡åŽçš„æ•°ç»„
 function uniqArray(arr) {
     var result = [];
     for (var i = 0; i < arr.length; i++) {
-        var ietm = arr[i];    // ÐÔÄÜÓÅ»¯
+        var ietm = arr[i];    // æ€§èƒ½ä¼˜åŒ–
         if (arr.indexOf(item, i + 1) == -1)
             result.push(item);
     }
     return result;
 }
 
-// Ñ¹ËõÏ¡ÊèÊý×é
+// åŽ‹ç¼©ç¨€ç–æ•°ç»„
 function dense(arr) {
     return arr.filter(function () {
         return true;
     });
 }
-//ÔÚÊý×éÖÐ²éÕÒËùÓÐ³öÏÖµÄx£¬²¢·µ»ØÒ»¸ö°üº¬Æ¥ÅäË÷ÒýµÄÊý×é
+//åœ¨æ•°ç»„ä¸­æŸ¥æ‰¾æ‰€æœ‰å‡ºçŽ°çš„xï¼Œå¹¶è¿”å›žä¸€ä¸ªåŒ…å«åŒ¹é…ç´¢å¼•çš„æ•°ç»„
 function findall(a, x) {
     var result = [],
         len = a.length,
-        pos = 0;                    // ¿ªÊ¼ËÑË÷µÄÎ»ÖÃ
+        pos = 0;                    // å¼€å§‹æœç´¢çš„ä½ç½®
     while (pos < len) {
         pos = a.indexOf(x, pos);
-        if (pos === -1) break;      //  Î´ÕÒµ½£¬¾ÍÍê³ÉËÑË÷
+        if (pos === -1) break;      //  æœªæ‰¾åˆ°ï¼Œå°±å®Œæˆæœç´¢
         result.push(pos);
-        pos += 1;                   //  ´ÓÏÂÒ»¸öÎ»ÖÃ¿ªÊ¼ËÑË÷
+        pos += 1;                   //  ä»Žä¸‹ä¸€ä¸ªä½ç½®å¼€å§‹æœç´¢
     }
     return result;
 }
 
 
 /**
- * ********* ×Ö·û´® ***********
+ * ********* å­—ç¬¦ä¸² ***********
  */
-//  ÅÐ¶ÏstrÊÇ·ñÎª×Ö·û´®
+//  åˆ¤æ–­stræ˜¯å¦ä¸ºå­—ç¬¦ä¸²
 function isString(str) {
     // return Object.prototype.toString.call(str) === "[object String]";
     return Object.prototype.toString.call(str).slice(8, -1) === "String";
 }
 
-// ¶Ô×Ö·û´®Í·Î²½øÐÐ¿Õ¸ñ×Ö·ûµÄÈ¥³ý¡¢°üÀ¨È«½Ç°ë½Ç¿Õ¸ñ¡¢TabµÈ£¬·µ»ØÒ»¸ö×Ö·û´®
+// å¯¹å­—ç¬¦ä¸²å¤´å°¾è¿›è¡Œç©ºæ ¼å­—ç¬¦çš„åŽ»é™¤ã€åŒ…æ‹¬å…¨è§’åŠè§’ç©ºæ ¼ã€Tabç­‰ï¼Œè¿”å›žä¸€ä¸ªå­—ç¬¦ä¸²
 function trim(str) {
     if (String.prototype.trim) {
         return str.trim();
@@ -82,22 +82,22 @@ function each(arr, fn) {
 }
 
 /**
- * ********* º¯Êý ***********
+ * ********* å‡½æ•° ***********
  */
-// ÅÐ¶ÏfnÊÇ·ñÎªÒ»¸öº¯Êý£¬·µ»ØÒ»¸öboolÖµ£¬ES5Ö±½ÓArray.isArray(fn)
+// åˆ¤æ–­fnæ˜¯å¦ä¸ºä¸€ä¸ªå‡½æ•°ï¼Œè¿”å›žä¸€ä¸ªboolå€¼
 function isFunction(fn) {
     // your implement
     return Object.prototype.toString().call(fn) === "[object Function]";
 }
 
-//  ¼ì²âÊµ²ÎÊµ¼Ê¸öÊýÓëÆÚÍû¸öÊýÊÇ·ñÏàÍ¬
+//  æ£€æµ‹å®žå‚å®žé™…ä¸ªæ•°ä¸ŽæœŸæœ›ä¸ªæ•°æ˜¯å¦ç›¸åŒ
 function check(args) {
-    var actual = args.length;     //  Êµ²ÎÕæÊµ¸öÊý
-    var expected = args.callee.length;    //  ÆÚÍûÊµ²Î¸öÊý
+    var actual = args.length;     //  å®žå‚çœŸå®žä¸ªæ•°
+    var expected = args.callee.length;    //  æœŸæœ›å®žå‚ä¸ªæ•°
     return actual === expected;
 }
 
-//  ²úÉú[from,to]Çø¼äµÄn¸öËæ»úÊý
+//  äº§ç”Ÿ[from,to]åŒºé—´çš„nä¸ªéšæœºæ•°
 function getRandom(from, to, n) {
     var arr = [];
     for (var i = 0; i < n; i++) {
@@ -106,7 +106,7 @@ function getRandom(from, to, n) {
     return arr;
 }
 
-//  ²úÉú[from,to)Çø¼äµÄn¸öËæ»úÊý
+//  äº§ç”Ÿ[from,to)åŒºé—´çš„nä¸ªéšæœºæ•°
 function getRandomTwo(from, to, n) {
     var arr = [];
     for (var i = 0; i < n; i++) {
@@ -117,44 +117,44 @@ function getRandomTwo(from, to, n) {
 
 
 /**
- * ********* ¶ÔÏó ***********
+ * ********* å¯¹è±¡ ***********
  */
-// Ê¹ÓÃµÝ¹éÀ´ÊµÏÖÒ»¸öÉî¶È¿ËÂ¡£¬¿ÉÒÔ¸´ÖÆÒ»¸öÄ¿±ê¶ÔÏó£¬·µ»ØÒ»¸öÍêÕû¿½±´
-// ±»¸´ÖÆµÄ¶ÔÏóÀàÐÍ»á±»ÏÞÖÆÎªÊý×Ö¡¢×Ö·û´®¡¢²¼¶û¡¢ÈÕÆÚ¡¢Êý×é¡¢Object¶ÔÏó¡£²»»á°üº¬º¯Êý¡¢ÕýÔò¶ÔÏóµÈ
+// ä½¿ç”¨é€’å½’æ¥å®žçŽ°ä¸€ä¸ªæ·±åº¦å…‹éš†ï¼Œå¯ä»¥å¤åˆ¶ä¸€ä¸ªç›®æ ‡å¯¹è±¡ï¼Œè¿”å›žä¸€ä¸ªå®Œæ•´æ‹·è´
+// è¢«å¤åˆ¶çš„å¯¹è±¡ç±»åž‹ä¼šè¢«é™åˆ¶ä¸ºæ•°å­—ã€å­—ç¬¦ä¸²ã€å¸ƒå°”ã€æ—¥æœŸã€æ•°ç»„ã€Objectå¯¹è±¡ã€‚ä¸ä¼šåŒ…å«å‡½æ•°ã€æ­£åˆ™å¯¹è±¡ç­‰
 function clone(src) {
-    //¶ÔÓÚ Êý×Ö ×Ö·û´® ²¼¶û null undefined
+    //å¯¹äºŽ æ•°å­— å­—ç¬¦ä¸² å¸ƒå°” null undefined
     if (src == null || typeof src != "object")
         return src;
-    //¶ÔÓÚ Date
+    //å¯¹äºŽ Date
     else if (src instanceof Date) {
         var clone = new Date(src);
         return clone;
     }
-    // ¶ÔÓÚ Êý×é
+    // å¯¹äºŽ æ•°ç»„
     else if (src instanceof Array) {
         var clone = [];
         src.forEach(function (x) {
             clone.push(x);
         });
         return clone;
-        // ¶ÔÓÚ Object
+        // å¯¹äºŽ Object
     } else if (src instanceof Object) {
 
         var clone = {};
-        /*  ·½·¨Ò»
+        /*  æ–¹æ³•ä¸€
          for (var key in src) {
 
-         if (src.hasOwnProperty(key))    // ºöÂÔ¼Ì³ÐÊôÐÔ
-         clone[key] = clone(src[key]); //µÝ¹é
-         //  clone[key]=src[key]; //    ½á¹ûÒ»ÖÂ ¿ÉÄÜÊÇÓÉÓÚÊÇÒýÓÃÀàÐÍËùÖÂ
+         if (src.hasOwnProperty(key))    // å¿½ç•¥ç»§æ‰¿å±žæ€§
+         clone[key] = clone(src[key]); //é€’å½’
+         //  clone[key]=src[key]; //    ç»“æžœä¸€è‡´ å¯èƒ½æ˜¯ç”±äºŽæ˜¯å¼•ç”¨ç±»åž‹æ‰€è‡´
          }
          */
 
         /*
-         ·½·¨¶þ
+         æ–¹æ³•äºŒ
          return JSON.parse(JSON.stringify(src));
          */
-        //  ·½·¨Èý
+        //  æ–¹æ³•ä¸‰
         var names = Object.getOwnPropertyNames(src);
         for (var i = 0; i < names.length; i++) {
             if (names[i] in clone) continue;
@@ -165,7 +165,7 @@ function clone(src) {
     }
 }
 
-// »ñÈ¡Ò»¸ö¶ÔÏóÀïÃæµÚÒ»²ãÔªËØµÄÊýÁ¿£¬·µ»ØÒ»¸öÕûÊý
+// èŽ·å–ä¸€ä¸ªå¯¹è±¡é‡Œé¢ç¬¬ä¸€å±‚å…ƒç´ çš„æ•°é‡ï¼Œè¿”å›žä¸€ä¸ªæ•´æ•°
 function getObjectNum(obj) {
     var element = 0;
     for (var key in obj) {
@@ -176,14 +176,14 @@ function getObjectNum(obj) {
     return element;
 }
 /**
- * ********* ÕýÔò±í´ïÊ½ ***********
+ * ********* æ­£åˆ™è¡¨è¾¾å¼ ***********
  */
-// ÅÐ¶ÏÊÇ·ñÎªÓÊÏäµØÖ·
+// åˆ¤æ–­æ˜¯å¦ä¸ºé‚®ç®±åœ°å€
 function isEmail(emailStr) {
     return emailStr.search(/^[a-z0-9]([-_\.]?[a-z0-9]+)*@([-_]?[a-z0-9]+)+[\.][a-z]{2,7}([\.][a-z]{2})?$/i) !== -1;
 }
 
-// ÅÐ¶ÏÊÇ·ñÎªÊÖ»úºÅ
+// åˆ¤æ–­æ˜¯å¦ä¸ºæ‰‹æœºå·
 function isMobilePhone(phone) {
     phone = phone + '';
     return phone.search(/^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/) !== -1;
@@ -191,28 +191,28 @@ function isMobilePhone(phone) {
 /**
  * ********* DOM ***********
  */
-//  ÅÐ¶ÏÔªËØÊÇ·ñÓÐÄ³¸öclass
+//  åˆ¤æ–­å…ƒç´ æ˜¯å¦æœ‰æŸä¸ªclass
 function hasClass(element, ClassName) {
     var name = element.className.split(" ");
     if (name.indexOf(ClassName) !== -1)
         return true;
 }
 
-// ÎªelementÔö¼ÓÒ»¸öÑùÊ½ÃûÎªnewClassNameµÄÐÂÑùÊ½
+// ä¸ºelementå¢žåŠ ä¸€ä¸ªæ ·å¼åä¸ºnewClassNameçš„æ–°æ ·å¼
 function addClass(element, newClassName) {
     if (!hasClass(element, newClassName))
         element.className += " " + newClassName;
 }
 
-// ÒÆ³ýelementÖÐµÄÑùÊ½oldClassName
+// ç§»é™¤elementä¸­çš„æ ·å¼oldClassName
 function removeClass(element, oldClassName) {
     if (hasClass(element, oldClassName))
         element.className = element.className.replace(oldClassName, "");
 }
 /**
- * ********* »·¾³ ***********
+ * ********* çŽ¯å¢ƒ ***********
  */
-//  ÅÐ¶Ïµ±Ç°½Å±¾ÔËÐÐÊ±ÊÇ·ñÎªÑÏ¸ñÄ£Ê½
+//  åˆ¤æ–­å½“å‰è„šæœ¬è¿è¡Œæ—¶æ˜¯å¦ä¸ºä¸¥æ ¼æ¨¡å¼
 var strict = (function () {
     return !this;
 }());
