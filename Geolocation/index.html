@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="getYourPosition.js"></script>
+</head>
+<body>
+<div id="div1">
+
+</div>
+<script type="text/javascript" src="completeAPI.js"></script>
+<script type="text/javascript">
+    var image = getmap();
+    document.body.appendChild(image);
+    var elt = document.getElementById("div1");
+    whereami(elt);
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片懒加载</title>
+</head>
+<body>
+<ul>
+    <li data-src="http://t03.pic.sogou.com/7620cd6e740c3c50.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/2c67d8e270eb61c3.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/9c9d058c0c731087.jpg"></li>
+    <li data-src="http://t02.pic.sogou.com/007da8d5456bc0ab.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/64d939a5456bc0ab.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/95eb5da5456bc0ab.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/5c3fa2b5456bc0ab.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/f6443925456bc0ab.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/f96780b5456bc0ab.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/54a75d2e740c3c50.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/3b173ee50fdad689.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/95eb5da5456bc0ab.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/5c3fa2b5456bc0ab.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/f6443925456bc0ab.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/f96780b5456bc0ab.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/54a75d2e740c3c50.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/3b173ee50fdad689.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/b0e3d909c131e9cb.jpg"></li>
+    <li data-src="http://t02.pic.sogou.com/27e362d461029a95.jpg"></li>
+    <li data-src="http://t02.pic.sogou.com/ddfb62d6f09be522_i.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/9448c50e46a53e65.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/b7e5a7e50fdad689.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/3825466e4e3b9ce4.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/1d7d602e740c3c50.jpg"></li>
+    <li data-src="http://t02.pic.sogou.com/085ea3d5456bc0ab.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/ad61be7270eb61c3.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/ed7705b270eb61c3.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/491c4cb461029a95.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/e603c6ae4e3b9ce4.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/6b6a148cdc19fbb4.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/c301bac9f514c378.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/11a6ce8e4e3b9ce4.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/41b26435456bc0ab.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/adb811acdc19fbb4.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/fbb08be9c131e9cb.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/b2ecd2ce4e3b9ce4.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/0509bff02200e0a5.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/0509bff02200e0a5.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/e655c4fe49cac8ea.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/5251ca4e740c3c50.jpg"></li>
+    <li data-src="http://t03.pic.sogou.com/7fe86f66ce211acb.jpg"></li>
+    <li data-src="http://t04.pic.sogou.com/541569b5df134ca6.jpg"></li>
+    <li data-src="http://t01.pic.sogou.com/d34a3f0e46a53e65.jpg"></li>
+    <li data-src="http://t02.pic.sogou.com/78bca85270eb61c3.jpg"></li>
+</ul>
+<script type="text/javascript">
+    function setImage() {
+        var picUl = document.getElementsByTagName("ul")[0];
+        var picItems = picUl.childNodes;
+        var items = [].slice.call(picItems);
+        items.forEach(function (item) {
+            if (item.dataset) {
+                var src = item.dataset.src;
+            } else {
+                src = item.getAttribute("data-src");
+            }
+            var img = document.createElement("img");
+            img.src = src;
+
+            if (item.childNodes.length === 0) {
+                item.appendChild(img);
+            }
+        });
+    }
+</script>
+</body>
+</html>
